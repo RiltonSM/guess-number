@@ -7,6 +7,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { NumberProvider } from '@/contexts/NumberProvider';
 import Colors from '@/constants/colors';
 import { useCallback } from 'react';
+import { StatusBar } from 'expo-status-bar';
 
 const RootLayout = () => {
     SplashScreen.preventAutoHideAsync()
@@ -26,24 +27,27 @@ const RootLayout = () => {
     }
 
     return (
-    <LinearGradient 
-        style={styles.root} 
-        colors={[Colors.primary700, Colors.accent500]}
-        onLayout={onLayoutRootView}
-    >
-        <ImageBackground 
-            source={require('../assets/images/background.png')}
-            resizeMode='cover'
-            style={styles.root}
-            imageStyle={styles.backgroundImage}
+        <>
+            <StatusBar style='light'/>
+            <LinearGradient 
+                style={styles.root} 
+                colors={[Colors.primary700, Colors.accent500]}
+                onLayout={onLayoutRootView}
             >
-            <NumberProvider>
-                <SafeAreaView style={styles.root}>
-                    <Slot/>
-                </SafeAreaView>
-            </NumberProvider>
-        </ImageBackground>
-    </LinearGradient>
+                <ImageBackground 
+                    source={require('../assets/images/background.png')}
+                    resizeMode='cover'
+                    style={styles.root}
+                    imageStyle={styles.backgroundImage}
+                    >
+                    <NumberProvider>
+                        <SafeAreaView style={styles.root}>
+                            <Slot/>
+                        </SafeAreaView>
+                    </NumberProvider>
+                </ImageBackground>
+            </LinearGradient>
+        </>
     )
 }
 
